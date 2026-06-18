@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Resume Builder</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+<div class="main-container">
+
+    <div class="left-panel">
+
+        <div class="header">
+            <h1>🤖 AI Resume Builder</h1>
+            <p>Create professional resumes, portfolios and cover letters using AI</p>
+        </div>
+
+        <form method="POST" onsubmit="showLoading()">
+
+            <label>Name</label>
+            <input type="text" name="name" required>
+
+            <label>Email</label>
+            <input type="email" name="email" required>
+
+            <label>Education</label>
+            <textarea name="education" rows="3"></textarea>
+
+            <label>Skills</label>
+            <textarea name="skills" rows="3"></textarea>
+
+            <label>Projects</label>
+            <textarea name="projects" rows="3"></textarea>
+
+            <label>Achievements</label>
+            <textarea name="achievements" rows="3"></textarea>
+
+            <label>Resume Template</label>
+
+            <select name="template">
+                <option value="Professional">Professional</option>
+                <option value="Modern">Modern</option>
+                <option value="Creative">Creative</option>
+            </select>
+
+            <div class="button-group">
+
+                <button type="submit" name="action" value="resume">
+                    Generate Resume
+                </button>
+
+                <button type="submit" name="action" value="cover">
+                    Generate Cover Letter
+                </button>
+
+                <button type="submit" name="action" value="portfolio">
+                    Generate Portfolio
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
+
+    <div class="right-panel">
+        <div id="loading" style="display:none;">
+    <h3>⏳ Generating with AI...</h3>
+</div>
+
+        <h2>AI Generated Output</h2>
+
+        {% if resume %}
+
+        <div class="resume-output">
+            <pre>{{ resume }}</pre>
+        </div>
+
+        <br>
+
+        <a href="/download_pdf">
+            <button type="button">
+                Download PDF
+            </button>
+        </a>
+
+        {% else %}
+
+        <div class="resume-output">
+            Your generated Resume, Cover Letter or Portfolio will appear here.
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</div>
+<script>
+function showLoading() {
+    document.getElementById("loading").style.display = "block";
+}
+</script>
+
+</body>
+</html>
